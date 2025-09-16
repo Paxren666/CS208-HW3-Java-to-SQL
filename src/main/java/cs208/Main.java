@@ -283,6 +283,41 @@ public class Main
         System.out.println("Updating existing student information...");
 
         // TODO: add your code here
+
+        int id = 0;
+        String firstName = null;
+        String lastName = null;
+        Date birthDate = null;
+
+
+        try
+        {
+            System.out.print("Enter the existing student id you want to update: ");
+            id = Integer.parseInt(inputScanner.nextLine());
+
+
+            System.out.print("Enter a new first name: ");
+            firstName = inputScanner.nextLine().trim();
+
+
+            System.out.print("Enter a new last name: ");
+            lastName = inputScanner.nextLine().trim();
+
+
+            System.out.print("Enter a new birth date in ISO format (yyyy-mm-dd): "); // Step 12: prompt for birth date
+            birthDate = Date.valueOf(inputScanner.nextLine());
+
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Invalid input, please try again.");
+            return;
+        }
+
+
+        Student studentToUpdate = new Student(id, firstName, lastName, birthDate);
+        database.updateExistingStudentInformation(studentToUpdate);
     }
 
     private static void menuDeleteExistingStudent()
