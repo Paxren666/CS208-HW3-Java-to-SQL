@@ -258,6 +258,11 @@ public class Main
         try
         {
             // TODO: add your code here
+            System.out.print("Enter the student first name: ");
+            firstName = inputScanner.nextLine().trim();
+
+            System.out.print("Enter the student last name: ");
+            lastName = inputScanner.nextLine().trim();
 
             System.out.print("Enter the student birth date in ISO format (yyyy-mm-dd): ");
             birthDate = Date.valueOf(inputScanner.nextLine());
@@ -269,6 +274,8 @@ public class Main
         }
 
         // TODO: add your code here
+        Student newStudent = new Student(firstName, lastName, birthDate);
+        database.addNewStudent(newStudent);
     }
 
     private static void menuUpdateExistingStudentInformation()
