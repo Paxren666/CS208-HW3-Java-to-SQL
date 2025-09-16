@@ -362,6 +362,10 @@ public class Database
                 String birthDate = resultSet.getString("birth_date");
 
                 // TODO: add your code here
+
+                // print the results of the current row
+                System.out.printf("| %d | %s | %s | %s |%n", id, firstName, lastName, birthDate);
+
             }
         }
         catch (SQLException sqlException)
