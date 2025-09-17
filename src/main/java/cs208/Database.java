@@ -529,6 +529,32 @@ public class Database
         }
     }
 
+    public void addStudentToClass(int studentID, int classID)
+    {
+        String sql =
+                "INSERT INTO registered_students (student_id, class_id) VALUES (?, ?);";
+
+        try (
+                Connection connection = getDatabaseConnection();
+                PreparedStatement sqlStatement = connection.prepareStatement(sql);
+        ) {
+                sqlStatement.setInt(1, studentID);
+                sqlStatement.setInt(2, classID);
+
+                int rowsAffected = sqlStatement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("SUCCESSFULLY registered student " + studentID + " to class " + classID);
+            } else {
+                System.out.println("Failed to register the student to the class.");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("SQLException: failed to register student to class");
+            System.out.println(e.getMessage());
+        }
+    }
+
     private void printTableHeader(String[] listOfColumnNames)
     {
         System.out.print("| ");
