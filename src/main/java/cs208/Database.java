@@ -462,6 +462,38 @@ public class Database
         }
     }
 
+    public void deleteExistingStudent(int idOfStudentToDelete)
+    {
+        String sql =
+                "DELETE FROM students\n" + "WHERE id = ?;";
+
+        try
+                (
+                        Connection connection = getDatabaseConnection();
+                        PreparedStatement sqlStatement = connection.prepareStatement(sql);
+                )
+        {
+            sqlStatement.setInt(1, idOfStudentToDelete);
+
+            int numberOfRowsAffected = sqlStatement.executeUpdate();
+            System.out.println("numberOfRowsAffected = " + numberOfRowsAffected);
+
+            if (numberOfRowsAffected > 0)
+            {
+                System.out.println("SUCCESSFULLY deleted the student with id = " + idOfStudentToDelete);
+            }
+            else
+            {
+                System.out.println("!!! WARNING: failed to delete the student with id = " + idOfStudentToDelete);
+            }
+        }
+        catch (SQLException sqlException)
+        {
+            System.out.println("!!! SQLException: failed to delete the student with id = " + idOfStudentToDelete);
+            System.out.println(sqlException.getMessage());
+        }
+    }
+
     public void listAllRegisteredStudents()
     {
         String sql =
