@@ -139,6 +139,10 @@ public class Main
                     menuAddStudentToClass();
                     break;
 
+                case 32:
+                    menuDropStudentFromClass();
+                    break;
+
                 default:
                     System.out.println("Invalid choice. Please enter a number such as 0, 1, 2, 10, 11, etc.");
             }
@@ -370,6 +374,28 @@ public class Main
         }
 
         database.addStudentToClass(studentID, classID);
+    }
+
+    private static void menuDropStudentFromClass()
+    {
+        System.out.println("Adding student to a class...");
+
+        int studentID = 0;
+        int classID = 0;
+
+        try {
+            System.out.print("Enter the student ID: ");
+            studentID = Integer.parseInt(inputScanner.nextLine());
+
+            System.out.print("Enter the class ID: ");
+            classID = Integer.parseInt(inputScanner.nextLine());
+        } catch (Exception e) {
+
+            System.out.println("Invalid input, please enter valid integers.");
+            return;
+        }
+
+        database.dropStudentFromClass(studentID, classID);
     }
 
 }

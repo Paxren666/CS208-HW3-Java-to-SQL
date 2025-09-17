@@ -555,6 +555,32 @@ public class Database
         }
     }
 
+    public void dropStudentFromClass(int studentID, int classID)
+    {
+        String sql =
+                "DELETE FROM registered_students WHERE student_id = ? AND class_id = ?;";
+
+        try (
+                Connection connection = getDatabaseConnection();
+                PreparedStatement sqlStatement = connection.prepareStatement(sql);
+        ) {
+            sqlStatement.setInt(1, studentID);
+            sqlStatement.setInt(2, classID);
+
+            int rowsAffected = sqlStatement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("SUCCESSFULLY dropped student " + studentID + " from class " + classID);
+            } else {
+                System.out.println("Failed to drop the student from the class. No matching registration found.");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("SQLException: failed to drop the student from the class");
+            System.out.println(e.getMessage());
+        }
+    }
+
     private void printTableHeader(String[] listOfColumnNames)
     {
         System.out.print("| ");
